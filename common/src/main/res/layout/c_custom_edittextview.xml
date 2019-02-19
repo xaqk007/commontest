@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="56dp">
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontFootnote"
+        android:textColor="@color/read_ff5252"/>
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:textSize="15sp"
+        android:textColor="@color/black_087"
+        android:textColorHint="@color/black_038"
+        android:paddingTop="23dp"
+        android:text=""/>
+    <TextView
+        android:id="@+id/errorLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_012" />
+</RelativeLayout>

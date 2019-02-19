@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Common</string>
+    <string name="fail_to_pay">支付失败</string>
+</resources>

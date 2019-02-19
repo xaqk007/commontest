@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/white_r4"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:paddingLeft="24dp"
+    android:paddingTop="24dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp">
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="您当前所在的城市已经改变， 是否切换到当前城市"
+        android:textSize="14sp"
+        android:textColor="@color/black_060"
+        android:lineSpacingExtra="4dp"/>
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tvMsg"
+        android:layout_marginTop="36dp"
+        android:layout_toLeftOf="@+id/tvConfirm"
+        android:text="取消"
+        android:textSize="15sp"
+        android:textColor="@color/black_038"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tvMsg"
+        android:layout_marginTop="36dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="-16dp"
+        android:text="切换"
+        android:textSize="15sp"
+        android:textColor="@color/ff7162"
+        android:alpha="0.8"
+        android:gravity="center"/>
+</RelativeLayout>

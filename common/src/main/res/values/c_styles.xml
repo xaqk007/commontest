@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="fontHeadLine">
+        <item name="android:textSize">22dp</item>
+    </style>
+    <style name="fontTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="fontSubHead">
+        <item name="android:textSize">16dp</item>
+    </style>
+    <style name="fontBody">
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="fontBody2">
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="fontCaption">
+        <item name="android:textSize">13dp</item>
+    </style>
+    <style name="fontFootnote">
+        <item name="android:textSize">12dp</item>
+    </style>
+    <style name="fontButton">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="C_BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="C_BaseAppTheme_Black" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="C_TRANSLUCENT" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/black_012</item>
+    </style>
+    <style name="c_alert_dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
+        <!--<item name="android:windowEnterTransition" tools:targetApi="lollipop">@transition/fade</item>-->
+        <!--<item name="android:windowExitTransition" tools:targetApi="lollipop">@transition/fade</item>-->
+        <!--<item name="android:windowAllowEnterTransitionOverlap" tools:targetApi="lollipop">true</item>-->
+        <!--<item name="android:windowAllowReturnTransitionOverlap" tools:targetApi="lollipop">true</item>-->
+    </style>
+
+    <style name="pop_from_bottom">
+        <item name="android:windowEnterAnimation">@anim/slide_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_to_bottom</item>
+    </style>
+    <style name="pop_from_top">
+        <item name="android:windowEnterAnimation">@anim/slide_in_from_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_to_top</item>
+    </style>
+    <style name="c_pop_style" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/c_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/c_popup_exit</item>
+    </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- 这里设置背景为透明，为了隐藏边框 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+        <item name="android:topDark">@color/white</item>
+        <!-- 这里是修改内容区域背景颜色 -->
+        <item name="android:centerDark">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/theme_color</item>
+    </style>
+
+    <style name="TransparentTheme" parent="BaseAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="TransparentTheme_1" parent="BaseAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="AlertDialog_white" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- 这里设置背景为透明，为了隐藏边框 -->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+        <item name="android:topDark">@color/white</item>
+        <!-- 这里是修改内容区域背景颜色 -->
+        <item name="android:centerDark">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
