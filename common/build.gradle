@@ -2,6 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
+//apply plugin: 'com.novoda.bintray-release'// 新增`
+
+apply plugin: 'com.github.dcendents.android-maven'    // 添加本行
+group='com.github.xaqk007'    // 添加本行
 
 android {
     compileSdkVersion androidCompileSdkVersion
@@ -9,8 +13,8 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -74,7 +78,7 @@ dependencies {
     api "com.android.support:recyclerview-v7:$supportLibraryVersion"
 
     //添加 Sensors Analytics SDK 依赖
-    api 'com.sensorsdata.analytics.android:SensorsAnalyticsSDK:3.0.2'
+    api 'com.sensorsdata.analytics.android:SensorsAnalyticsSDK:3.2.2'
     api 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$BaseRecyclerViewAdapterHelperVersion"
@@ -90,52 +94,115 @@ configurations {
     all*.exclude group: 'com.android.support', module: 'multidex'
 }
 
-def isReleaseBuild() {
-    return VERSION_NAME.toUpperCase().contains("SNAPSHOT") == false
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
-def getRepositoryUsername() {
-    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
-}
-def getRepositoryPassword() {
-    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
-}
-def getRepositoryUrl() {
-    return isReleaseBuild() ? RELEASE_REPOSITORY_URL : SNAPSHOT_REPOSITORY_URL
-}
-afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                pom.groupId = GROUP
-                pom.artifactId = POM_ARTIFACT_ID
-                pom.version = VERSION_NAME
-                repository(url: getRepositoryUrl()) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-            }
-        }
-    }
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.sourceFiles
-    }
 
-    //解决 JavaDoc 中文注释生成失败的问题
-    tasks.withType(Javadoc) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-        options.addStringOption('encoding', 'UTF-8')
-        options.addStringOption('charSet', 'UTF-8')
-    }
-    artifacts {
-        archives androidSourcesJar
-//        archives androidJavadocsJar
-    }
+// 打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
 }
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+//def isReleaseBuild() {
+//    return VERSION_NAME.toUpperCase().contains("SNAPSHOT") == false
+//}
+//def getRepositoryUsername() {
+//    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+//}
+//def getRepositoryPassword() {
+//    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+//}
+//def getRepositoryUrl() {
+//    return isReleaseBuild() ? RELEASE_REPOSITORY_URL : SNAPSHOT_REPOSITORY_URL
+//}
+//afterEvaluate { project ->
+//    uploadArchives {
+//        repositories {
+//            mavenDeployer {
+//                pom.groupId = GROUP
+//                pom.artifactId = POM_ARTIFACT_ID
+//                pom.version = VERSION_NAME
+//                repository(url: getRepositoryUrl()) {
+//                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+//                }
+//            }
+//        }
+//    }
+//    task androidJavadocs(type: Javadoc) {
+//        source = android.sourceSets.main.java.srcDirs
+//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    }
+//    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//        classifier = 'javadoc'
+//        from androidJavadocs.destinationDir
+//    }
+//    task androidSourcesJar(type: Jar) {
+//        classifier = 'sources'
+//        from android.sourceSets.main.java.sourceFiles
+//    }
+//
+//    //解决 JavaDoc 中文注释生成失败的问题
+//    tasks.withType(Javadoc) {
+//        options.addStringOption('Xdoclint:none', '-quiet')
+//        options.addStringOption('encoding', 'UTF-8')
+//        options.addStringOption('charSet', 'UTF-8')
+//    }
+//    artifacts {
+//        archives androidSourcesJar
+////        archives androidJavadocsJar
+//    }
+//}
+//
+//publish { // 新增
+//    userOrg = 'xaqk007'// 注册bintray时的username
+//    groupId = 'com.anniu.commonlib'// 项目包名
+//    artifactId = 'commonlib'// 项目名
+//    publishVersion = '1.0.0'// 发布版本号
+//    desc = 'Summarize the tools or methods commonly used in routine development'// 项目描述，可选项`
+////    website = '[https://github.com/huangweicai/infinitus_demo_lib'](https://github.com/huangweicai/infinitus_demo_lib')// 项目站点，可选项`
+//}
+
+//ext {
+//    libraryPackaging = 'aar'                                            //上传aar形式的打包文件
+//
+//    // jcenter
+//    bintrayRepo = "maven"                                             // 你上传的位于bintray中的Repository名称，如果没有创建会有一个叫maven的
+//    name = 'common'                                                // 必须和library module的名字相同
+//    libraryDesc = 'A common Library'
+//    publishedGroupId = 'com.anniu.commonlib'                // 填写groupId， 一般是包名，比如：com.android.support
+//    versionName = '1.0.0'                                               // 版本号，比如：22.2.1
+//    websiteUrl = 'http://gitlab.anniu-inc.com/frontend/android_libs/common'              // 可以填写github上的库地址.
+//    issueTrackerUrl = 'http://gitlab.anniu-inc.com/frontend/android_libs/common/issues'  // 可以填写github库的issue地址.
+//    vcsUrl = 'git@gitlab.anniu-inc.com:frontend/android_libs/common.git'              // 可以填写github上库的地址.
+//    licenseName = "Apache-2.0"
+//    libraryVersionDesc = 'version descriotion'
+//
+//    // maven
+//    artifact = 'common'                                            // 必须和library module的名字相同
+//    libraryName = 'commonlib'
+//    developerId = 'xaqk007'
+//    developerName = 'xaqk007'
+//    developerEmail = 'xaqk007@126.com'
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//
+//}
+//apply from: 'android-maven-install.gradle'
+//apply from: 'android-tasks.gradle'
+//apply from: 'bintray.gradle'
