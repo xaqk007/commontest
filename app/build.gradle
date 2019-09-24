@@ -32,5 +32,5 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoCoreVersion"
-//    implementation 'com.github.xaqk007:commontest:v1.0.1'
+//    implementation 'com.github.xaqk007:commontest:v1.0.2'
 }

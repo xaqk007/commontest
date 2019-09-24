@@ -17,7 +17,7 @@ buildscript {
         classpath 'com.sensorsdata.analytics.android:android-gradle-plugin2:3.0.1'
         classpath 'com.novoda:bintray-release:0.9.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
